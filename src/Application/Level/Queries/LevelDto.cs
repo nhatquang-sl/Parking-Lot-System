@@ -3,7 +3,7 @@ using PLS.Application.Common.Interfaces.Mappings;
 
 namespace PLS.Application.Level.Queries
 {
-    public class LevelDto : IMapFrom<Domain.Entities.Level>
+    public class LevelDto : IMapFrom<Domain.Level>
     {
         public LevelDto()
         {
