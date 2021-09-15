@@ -7,7 +7,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PLS.Application.Common.Interfaces;
 
-namespace PLS.Application.Level.Queries
+
+namespace PLS.Application.Level.Queries.GetAllLevelsQuery
 {
     public class GetAllLevelsQuery : IRequest<IList<LevelDto>>
     {

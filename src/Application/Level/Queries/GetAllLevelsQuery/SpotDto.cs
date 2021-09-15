@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using PLS.Application.Common.Interfaces.Mappings;
-
-namespace PLS.Application.Level.Queries
+namespace PLS.Application.Level.Queries.GetAllLevelsQuery
 {
     public class SpotDto : IMapFrom<Domain.Spot>
     {
