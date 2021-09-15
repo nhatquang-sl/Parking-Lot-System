@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PLS.Application;
 using PLS.Infrastructure;
+using WebUI.Filters;
 
 namespace WebUI
 {
@@ -29,7 +30,8 @@ namespace WebUI
                 configure.Title = "Parking Lot System";
             });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options =>
+                options.Filters.Add(new ExceptionFilter()));
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
