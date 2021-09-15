@@ -117,7 +117,7 @@
       "checksumCacheEnabled": false,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "ClientApp/src/app/app.api",
+      "output": "ClientApp/src/app/app.api.ts",
       "newLineBehavior": "Auto"
     }
   }
