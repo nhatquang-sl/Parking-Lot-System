@@ -8,7 +8,7 @@ import { AppComponent } from "./app.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { ParkingSpotComponent } from "./parking-spot/parking-spot.component";
 import { VehicleParkComponent } from "./vehicle-park/vehicle-park.component";
-import { FetchDataComponent } from "./fetch-data/fetch-data.component";
+import { VehicleLeaveComponent } from "./vehicle-leave/vehicle-leave.component";
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { FetchDataComponent } from "./fetch-data/fetch-data.component";
     NavMenuComponent,
     ParkingSpotComponent,
     VehicleParkComponent,
-    FetchDataComponent,
+    VehicleLeaveComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -25,7 +25,7 @@ import { FetchDataComponent } from "./fetch-data/fetch-data.component";
     RouterModule.forRoot([
       { path: "", component: ParkingSpotComponent, pathMatch: "full" },
       { path: "vehicle-park", component: VehicleParkComponent },
-      { path: "fetch-data", component: FetchDataComponent },
+      { path: "vehicle-leave", component: VehicleLeaveComponent },
     ]),
   ],
   providers: [],

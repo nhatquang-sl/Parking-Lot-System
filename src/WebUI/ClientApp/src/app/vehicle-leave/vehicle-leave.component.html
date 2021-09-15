@@ -1,0 +1,17 @@
+<h1 id="tableLabel">Leave Your Vehicle</h1>
+
+<p class="bg-success" *ngIf="successMessage">{{successMessage}}</p>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputLicensePlate" class="col-sm-2 control-label">License Plate</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputLicensePlate" name="inputLicensePlate" placeholder="License Plate" [(ngModel)]="command.licensePlate">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+  </div>
+</form>
+
