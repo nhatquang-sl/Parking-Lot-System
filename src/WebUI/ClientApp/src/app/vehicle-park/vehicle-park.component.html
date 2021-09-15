@@ -1,0 +1,28 @@
+<h1 id="tableLabel">Park Your Vehicle</h1>
+
+<p class="bg-success" *ngIf="successMessage">{{successMessage}}</p>
+<p class="bg-warning" *ngIf="errorMessage">{{errorMessage}}</p>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="inputLicensePlate" class="col-sm-2 control-label">License Plate</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputLicensePlate" name="inputLicensePlate" placeholder="License Plate" [(ngModel)]="command.licensePlate">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="selectVehicleSize" class="col-sm-2 control-label">VehicleSize</label>
+    <div class="col-sm-10">
+      <select  class="form-control" id="selectVehicleSize"
+              [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="command.type">
+        <option *ngFor="let type of vehicleTypes" [ngValue]="type.value">{{type.text}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+  </div>
+</form>
+

@@ -7,7 +7,7 @@ import { RouterModule } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { ParkingSpotComponent } from "./parking-spot/parking-spot.component";
-import { CounterComponent } from "./counter/counter.component";
+import { VehicleParkComponent } from "./vehicle-park/vehicle-park.component";
 import { FetchDataComponent } from "./fetch-data/fetch-data.component";
 
 @NgModule({
@@ -15,7 +15,7 @@ import { FetchDataComponent } from "./fetch-data/fetch-data.component";
     AppComponent,
     NavMenuComponent,
     ParkingSpotComponent,
-    CounterComponent,
+    VehicleParkComponent,
     FetchDataComponent,
   ],
   imports: [
@@ -24,7 +24,7 @@ import { FetchDataComponent } from "./fetch-data/fetch-data.component";
     FormsModule,
     RouterModule.forRoot([
       { path: "", component: ParkingSpotComponent, pathMatch: "full" },
-      { path: "counter", component: CounterComponent },
+      { path: "vehicle-park", component: VehicleParkComponent },
       { path: "fetch-data", component: FetchDataComponent },
     ]),
   ],
