@@ -230,3 +230,5 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/src/WebUI/ClientApp/src/app/app.api.ts
+/src/WebUI/wwwroot/api/specification.json
