@@ -1,0 +1,39 @@
+<h1 id="tableLabel">Parking Spots</h1>
+
+<p>This page display the status of Parking Spots for each Level.</p>
+
+<p *ngIf="!levels"><em>Loading...</em></p>
+
+<div class="row">
+  <div class="col-md-2 text-center">
+    <strong>Levels</strong>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    <div *ngFor="let level of levels; let i = index">
+      <button type="button" class="btn btn-block" 
+      [ngClass]="{'btn-primary': i === levelSelected, 
+                 'btn-default': i != levelSelected}"
+      (click)="selectLevel(i)">{{level.floor}}</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    <strong>Spots</strong>
+  </div>
+</div>
+<table class='table table-bordered' aria-labelledby="tableLabel" *ngFor="let row of rows()">
+    <tr>
+      <td scope="col" [attr.colspan]="'1'" [style.width.%]="spotWidth" *ngFor="let spot of filterSpotsOnRow(row)">{{spot.number}}</td>
+    </tr>
+ 
+  <tr>
+    <td class="text-center text-uppercase"
+    [attr.colspan]="spot.vehicleSize" 
+    [style.overflow-wrap]="'anywhere'" 
+    [style.width.%]="spotWidth" 
+    *ngFor="let spot of filterSpots(row)">{{ spot.vehicleLicensePlate }}</td>
+  </tr>
+</table>
