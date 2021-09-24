@@ -42,11 +42,13 @@ export class VehicleParkComponent {
           result[0].row
         }, Spot:`;
         result.forEach((spot) => {
+          this.errorMessage = "";
           this.successMessage += ` [${spot.number}]`;
         });
       },
       (error) => {
         this.errorMessage = error.response;
+        this.successMessage = "";
       }
     );
   }

@@ -31,9 +31,6 @@ namespace PLS.Application.Parking.Commands.Park
 
         public async Task<List<SpotDto>> Handle(ParkCommand request, CancellationToken cancellationToken)
         {
-            if (_context.Spots.Where(x => x.VehicleLicensePlate == request.LicensePlate.ToLower()).Any()) 
-                throw new BadRequestException("Your License Plate is duplicated!");
-
             int size = (int)request.Type;
             var spots = await _context.Spots.Where(x => x.VehicleLicensePlate == null)
                 .ProjectTo<SpotDto>(_mapper.ConfigurationProvider)
@@ -48,7 +45,7 @@ namespace PLS.Application.Parking.Commands.Park
             {
                 parkingSpots = FindSpots(spots, size);
             }
-            if (parkingSpots.Count == 0) 
+            if (parkingSpots.Count == 0)
                 throw new BadRequestException("There is no available spots for you vehicle!");
 
             var parkingSpotIds = parkingSpots.Select(x => x.Id).ToList();
