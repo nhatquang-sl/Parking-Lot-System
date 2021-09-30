@@ -7,7 +7,6 @@ using PLS.Application.Common.Interfaces;
 namespace PLS.Application.Parking.Commands.Park
 {
     public class ParkCommandValidator : AbstractValidator<ParkCommand>
-
     {
         private readonly IApplicationDbContext _context;
 
@@ -25,4 +24,3 @@ namespace PLS.Application.Parking.Commands.Park
         }
     }
 }
- 

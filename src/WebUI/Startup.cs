@@ -23,7 +23,7 @@ namespace WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplication();
-            services.AddInfrastructure(Configuration);
+            services.AddInfrastructure();
 
             services.AddOpenApiDocument(configure =>
             {
