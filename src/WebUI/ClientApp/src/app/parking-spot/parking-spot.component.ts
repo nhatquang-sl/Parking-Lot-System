@@ -42,7 +42,9 @@ export class ParkingSpotComponent {
   }
 
   public filterSpotsOnRow(row: number) {
-    return this.spots.filter((x) => x.row == row);
+    return this.spots
+      .filter((x) => x.row == row)
+      .sort((a, b) => a.number - b.number);
   }
 
   public rows() {

@@ -1,11 +1,11 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PLS.Application;
-using PLS.Infrastructure;
 using WebUI.Filters;
 
 namespace WebUI
@@ -19,11 +19,11 @@ namespace WebUI
 
         public IConfiguration Configuration { get; }
 
+        public ILifetimeScope AutofacContainer { get; private set; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplication();
-            services.AddInfrastructure();
 
             services.AddOpenApiDocument(configure =>
             {
@@ -88,6 +88,21 @@ namespace WebUI
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            this.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
+        }
+
+        // ConfigureContainer is where you can register things directly
+        // with Autofac. This runs after ConfigureServices so the things
+        // here will override registrations made in ConfigureServices.
+        // Don't build the container; that gets done for you by the factory.
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            // Register your own things directly with Autofac here. Don't
+            // call builder.Populate(), that happens in AutofacServiceProviderFactory
+            // for you.
+            builder.RegisterModule(new PLS.Application.DependencyInjection());
+            builder.RegisterModule(new PLS.Infrastructure.DependencyInjection());
         }
     }
 }

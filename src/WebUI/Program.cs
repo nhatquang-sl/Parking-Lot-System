@@ -1,4 +1,5 @@
 using System;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,8 +39,12 @@ namespace WebUI
             host.Run();
         }
 
+        // ASP.NET Core 3.0+:
+        // The UseServiceProviderFactory call attaches the
+        // Autofac provider to the generic hosting mechanism.
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
