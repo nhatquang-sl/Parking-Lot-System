@@ -1,18 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PLS.Application.Common.Interfaces;
+using PLS.Application.Common.Logging;
 using PLS.Infrastructure.Configurations;
+using PLS.Infrastructure.Logging;
 using PLS.Infrastructure.Persistence;
+using Serilog;
 
 namespace PLS.Infrastructure
 {
-    public class DependencyInjection : Module
+    public class DependencyInjection : Autofac.Module
     {
+        private readonly Assembly _callingAssembly;
+        public DependencyInjection(Assembly assembly)
+        {
+            _callingAssembly = assembly;
+        }
+
         protected override void Load(ContainerBuilder builder)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -38,6 +49,29 @@ namespace PLS.Infrastructure
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
             services.AddScoped<IConfigFactory, ConfigFactory>();
+
+            builder.Register<ILogger>((c, p) =>
+            {
+                return new LoggerConfiguration()
+                  .ReadFrom.Configuration(configuration)
+                  .Enrich.WithProperty("AssemblyVersions", new Dictionary<string, string>
+                  {
+                      {
+                          _callingAssembly.GetName().Name,
+                          _callingAssembly.GetName().Version.ToString()
+                      },
+                      {
+                          typeof(Application.DependencyInjection).Assembly.GetName().Name,
+                          typeof(Application.DependencyInjection).Assembly.GetName().Version.ToString()
+                      },
+                      {
+                          ThisAssembly.GetName().Name,
+                          ThisAssembly.GetName().Version.ToString()
+                      },
+                  })
+                  .CreateLogger();
+            });
+            services.AddScoped<ILogTrace, LogTrace>();
             builder.Populate(services);
         }
     }

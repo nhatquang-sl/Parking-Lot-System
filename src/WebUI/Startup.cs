@@ -102,7 +102,7 @@ namespace WebUI
             // call builder.Populate(), that happens in AutofacServiceProviderFactory
             // for you.
             builder.RegisterModule(new PLS.Application.DependencyInjection());
-            builder.RegisterModule(new PLS.Infrastructure.DependencyInjection());
+            builder.RegisterModule(new PLS.Infrastructure.DependencyInjection(typeof(Startup).Assembly));
         }
     }
 }
